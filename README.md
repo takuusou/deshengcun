@@ -2,7 +2,7 @@
 
 面向村民的公益服务微信小程序，配套村干部管理后台。项目希望让村务信息更容易获取，让便民办事和处理结果更容易查询，不以盈利为目的。
 
-项目案例文章：[得胜服务通 · Notion 项目介绍](https://www.notion.so/3f715452b84481a9a9a7f9bfb8e40a9f)（公开发布前复核中，暂可能需要访问权限）。
+项目案例文章：[得胜服务通 · Notion 项目介绍](https://wide-nest-95c.notion.site/3f715452b84481a9a9a7f9bfb8e40a9f)。
 
 村民端（小程序）
  <img width="1454" height="768" alt="8d65657d-8507-4d32-a6bc-7d541703392f" src="https://github.com/user-attachments/assets/260b34b8-0fca-467a-bd13-d2d79045a52e" />
