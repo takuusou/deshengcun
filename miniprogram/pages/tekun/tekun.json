@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "特困认证",
+  "usingComponents": {
+    "material-upload-flow": "../../components/material-upload-flow/material-upload-flow"
+  }
+}

@@ -1,0 +1,1 @@
+<material-upload-flow config="{{flowConfig}}" material-items="{{materialItems}}" />

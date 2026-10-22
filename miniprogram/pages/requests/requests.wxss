@@ -1,0 +1,41 @@
+.request-type-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14rpx;
+  margin-top: 14rpx;
+}
+
+.request-type-item {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  min-height: 76rpx;
+  padding: 0 18rpx;
+  border-radius: 20rpx;
+  color: #1a1612;
+  background: #faf6ed;
+  border: 1rpx solid #efe8da;
+  box-sizing: border-box;
+}
+
+.request-type-item text {
+  font-weight: 600;
+}
+
+.request-field-tip {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: #7a6e64;
+}
+
+.snapshot-tip {
+  margin-top: 18rpx;
+  padding: 16rpx 18rpx;
+  border-radius: 18rpx;
+  background: #fff7ec;
+  border: 1rpx solid #f1ddc2;
+  color: #7a4d1d;
+  font-size: 24rpx;
+  line-height: 1.6;
+}

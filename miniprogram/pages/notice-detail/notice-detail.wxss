@@ -1,0 +1,67 @@
+page {
+  background: #f6f4ef;
+}
+
+.nd-page {
+  min-height: 100vh;
+  background: #fff;
+}
+
+/* 头部 */
+.nd-head {
+  padding: 32rpx 32rpx 28rpx;
+  border-bottom: 1rpx solid #ede6d8;
+}
+.nd-pin {
+  display: inline-block;
+  font-size: 20rpx;
+  color: #a63d2f;
+  background: #f5e8e6;
+  padding: 4rpx 14rpx;
+  border-radius: 8rpx;
+  margin-bottom: 16rpx;
+}
+.nd-title {
+  font-family: "Songti SC", "STSong", serif;
+  font-size: 38rpx;
+  color: #1a1612;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 16rpx;
+}
+.nd-meta {
+  font-size: 22rpx;
+  color: #b8afa3;
+  letter-spacing: 0.5rpx;
+}
+
+/* 正文 */
+.nd-content {
+  padding: 30rpx 32rpx;
+  font-size: 28rpx;
+  color: #3a332c;
+  line-height: 1.95;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* 配图：纵向大图 */
+.nd-imgs {
+  padding: 0 32rpx 30rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 18rpx;
+}
+.nd-img {
+  width: 100%;
+  border-radius: 14rpx;
+  background: #ece6d8;
+  display: block;
+}
+
+.nd-loading {
+  text-align: center;
+  color: #b8afa3;
+  font-size: 26rpx;
+  padding: 120rpx 0;
+}

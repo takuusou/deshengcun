@@ -1,0 +1,60 @@
+<view class="records-page">
+  <view class="record-tabs">
+    <block wx:for="{{recordTabs}}" wx:key="value">
+      <view
+        class="record-tab {{recordTab === item.value ? 'on' : ''}}"
+        data-tab="{{item.value}}"
+        bindtap="switchRecordTab"
+      >
+        <text>{{item.label}}</text>
+        <text wx:if="{{item.value === 'doing' && doingCount > 0}}" class="record-tab-badge">{{doingCount}}</text>
+      </view>
+    </block>
+  </view>
+
+  <view class="records-body">
+    <view class="rec-empty" wx:if="{{!hasProfile}}">
+      <view class="rec-empty-ic">办</view>
+      <view class="rec-empty-title">登录后查看个人办理记录</view>
+      <view class="rec-empty-desc">完成基础实名登记后，可查看申请记录、办理进度和结果。</view>
+      <view class="rec-empty-btn" bindtap="goAuthCenter">去登记身份信息</view>
+    </view>
+
+    <block wx:else>
+      <view class="rec-empty" wx:if="{{loading && !displayRecords.length}}">
+        <view class="rec-empty-ic">候</view>
+        <view class="rec-empty-title">加载中</view>
+      </view>
+
+      <view class="rec-empty" wx:elif="{{!displayRecords.length}}">
+        <view class="rec-empty-ic">空</view>
+        <view class="rec-empty-title">{{recordTab === 'all' ? '您还没有办理记录' : '该分类下暂无记录'}}</view>
+        <view class="rec-empty-desc">在「办理」页提交申请或反馈后，记录会显示在这里，方便您随时查看进度。</view>
+        <view class="rec-empty-btn" bindtap="goServicePage">去办理</view>
+      </view>
+
+      <view class="rec-list" wx:else>
+        <block wx:for="{{displayRecords}}" wx:key="record_id">
+          <view
+            class="rec-row"
+            data-source="{{item.source}}"
+            data-record-id="{{item.raw_id}}"
+            bindtap="openRecordDetail"
+          >
+            <view class="rec-row-1">
+              <text class="rec-row-title">{{item.title}}</text>
+              <view class="rec-status rec-status-{{item.group}}">
+                <view class="rec-status-dot"></view>
+                <text>{{item.status_label}}</text>
+              </view>
+            </view>
+            <view class="rec-row-2">
+              <text class="rec-row-type">{{item.type_label}}</text>
+              <text class="rec-row-date">{{item.date}}</text>
+            </view>
+          </view>
+        </block>
+      </view>
+    </block>
+  </view>
+</view>

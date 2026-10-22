@@ -1,0 +1,388 @@
+<view class="v11-page has-fixed-topbar">
+  <view class="v11-topbar v11-topbar--square-centered">
+    <view class="v11-topbar-ring v11-topbar-ring--large"></view>
+    <view class="v11-topbar-ring v11-topbar-ring--small"></view>
+    <view class="v11-topbar-copy">
+      <view class="v11-topbar-row">
+        <view class="v11-topbar-title">{{detail ? detail.title : "政务服务"}}</view>
+      </view>
+      <view class="v11-topbar-sub">{{detail ? detail.subtitle : "事项详情与在线申请"}}</view>
+    </view>
+  </view>
+
+  <view class="v11-content">
+    <view class="card" wx:if="{{loading}}">
+      <view class="muted">加载中...</view>
+    </view>
+
+    <view class="card apply-card" wx:if="{{detail && detail.detail_type === 'employment_training'}}">
+      <view class="card-title">填写信息</view>
+      <view class="section-sub">先把申请人信息填好，后面选择岗位或培训时会直接带入。</view>
+      <view class="autofill-tip">已实名信息会自动带入；如需修改姓名或联系电话，可在下方调整。</view>
+      <view class="form-grid ui-mt-14">
+        <view class="form-field">
+          <view class="label">姓名</view>
+          <input class="input" value="{{applicantName}}" placeholder="请输入姓名" bindinput="onApplicantNameInput" />
+        </view>
+        <view class="form-field">
+          <view class="label">联系电话</view>
+          <input
+            class="input"
+            type="text"
+            maxlength="13"
+            value="{{applicantPhone}}"
+            placeholder="不填则使用实名绑定手机号"
+            bindinput="onApplicantPhoneInput"
+          />
+        </view>
+      </view>
+    </view>
+
+    <block wx:if="{{detail && detail.detail_type === 'external'}}">
+      <view class="card">
+        <view class="card-title">跳转办理</view>
+        <view class="section-sub">{{detail.detail_payload.note || "点击下方按钮后，将跳转到对应政务平台小程序。"}}</view>
+        <button class="btn-primary ui-mt-18" bindtap="openExternalService">{{detail.action_label || "打开小程序"}}</button>
+      </view>
+    </block>
+
+    <block wx:if="{{detail && detail.detail_type === 'certificate'}}">
+      <view class="cert-steps">
+        <view class="cert-step {{certStepChooseClass}}">
+          <view class="cert-step-line"></view>
+          <view class="cert-step-dot">{{certStepChooseText}}</view>
+          <view class="cert-step-text">选择</view>
+        </view>
+        <view class="cert-step {{certStepFillClass}}">
+          <view class="cert-step-line"></view>
+          <view class="cert-step-dot">{{certStepFillText}}</view>
+          <view class="cert-step-text">填写</view>
+        </view>
+        <view class="cert-step {{certStepPreviewClass}}">
+          <view class="cert-step-line"></view>
+          <view class="cert-step-dot">3</view>
+          <view class="cert-step-text">预览</view>
+        </view>
+        <view class="cert-step todo">
+          <view class="cert-step-line"></view>
+          <view class="cert-step-dot">4</view>
+          <view class="cert-step-text">审核</view>
+        </view>
+      </view>
+
+      <view class="card cert-select-card" wx:if="{{certificateStep !== 'preview'}}">
+        <view class="chosen-cert" wx:if="{{selectedCertificateKey && !certificateSelectionOpen}}">
+          <view class="chosen-check">✓</view>
+          <view class="chosen-title">{{selectedCertificateTitle}}</view>
+          <button class="chosen-change" bindtap="changeCertificate">更换</button>
+        </view>
+        <block wx:else>
+          <view class="card-title">开什么证明？</view>
+          <view class="cert-list ui-mt-14">
+            <block wx:for="{{visibleCertificateItems}}" wx:key="key">
+              <view
+                class="cert-item {{selectedCertificateKey===item.key ? 'active' : ''}}"
+                data-key="{{item.key}}"
+                data-title="{{item.title}}"
+                bindtap="chooseCertificate"
+              >
+                <view class="cert-item-title">{{item.display_title}}</view>
+                <view class="cert-item-note" wx:if="{{item.display_note}}">{{item.display_note}}</view>
+              </view>
+            </block>
+          </view>
+          <button
+            wx:if="{{certificateTotal > 6}}"
+            class="view-all-cert"
+            bindtap="toggleCertificateList"
+          >
+            {{viewAllCertificateText}}
+          </button>
+        </block>
+      </view>
+
+      <view class="card my-info-card" wx:if="{{selectedCertificateKey && certificateStep === 'fill'}}">
+        <view class="my-info-head">
+          <view class="my-info-badge">已填好</view>
+          <view class="my-info-summary">{{applicantSummary}}</view>
+          <button class="my-info-toggle" bindtap="toggleUserInfo">{{userInfoExpanded ? "收起" : "修改"}}</button>
+        </view>
+        <view class="form-grid ui-mt-14" wx:if="{{userInfoExpanded}}">
+          <view class="form-field">
+            <view class="label">本人姓名</view>
+            <input class="input" value="{{applicantName}}" placeholder="请输入姓名" bindinput="onApplicantNameInput" />
+          </view>
+          <view class="form-field">
+            <view class="label">联系电话</view>
+            <input class="input" type="text" maxlength="13" value="{{applicantPhone}}" placeholder="不填则使用实名绑定手机号" bindinput="onApplicantPhoneInput" />
+          </view>
+          <view class="form-field">
+            <view class="label">本人性别</view>
+            <view class="readonly-input" wx:if="{{profile && profile.gender && profile.gender !== '未知'}}">{{profile.gender}}</view>
+            <picker wx:else class="picker" mode="selector" range="{{certGenderOptions}}" value="{{certGenderIndex}}" bindchange="onCertificateGenderChange">
+              <view class="picker-text">{{certGenderOptions[certGenderIndex]}}</view>
+            </picker>
+          </view>
+          <view class="form-field form-span-2">
+            <view class="label">本人身份证号 <text class="label-opt">已自动带入</text></view>
+            <input class="input" value="{{formInputs.id_card}}" data-key="id_card" placeholder="{{idCardPlaceholder}}" bindinput="onFormInput" />
+            <view class="auto-id-tip" wx:if="{{applicantIdentityMeta}}">{{applicantIdentityMeta}}</view>
+          </view>
+        </view>
+      </view>
+
+      <view class="card cert-form-card" wx:if="{{selectedCertificateKey && certificateStep === 'fill'}}">
+        <view class="card-title">{{isRelationshipCertificate ? "证明对方" : "填写证明用途"}}</view>
+        <view class="form-grid ui-mt-14">
+          <block wx:if="{{isRelationshipCertificate}}">
+            <view class="form-field form-span-2">
+              <view class="label">对方姓名</view>
+              <input class="input" value="{{formInputs.related_name}}" data-key="related_name" placeholder="请输入对方姓名" bindinput="onFormInput" />
+            </view>
+            <view class="form-field form-span-2">
+              <view class="label">对方身份证号</view>
+              <input class="input" value="{{formInputs.related_id_card}}" data-key="related_id_card" placeholder="请输入对方身份证号" bindinput="onFormInput" />
+              <view class="auto-id-tip {{relatedGenderNeedsManual ? 'warn' : ''}}" wx:if="{{relatedIdCardHint}}">{{relatedIdCardHint}}</view>
+            </view>
+            <view class="form-field form-span-2" wx:if="{{relatedGenderNeedsManual}}">
+              <view class="label">对方性别</view>
+              <picker class="picker" mode="selector" range="{{certGenderOptions}}" value="{{relatedGenderIndex}}" bindchange="onCertificateRelatedGenderChange">
+                <view class="picker-text">{{certGenderOptions[relatedGenderIndex]}}</view>
+              </picker>
+            </view>
+            <view class="form-field form-span-2">
+              <view class="label">关系类型</view>
+              <picker class="picker" mode="selector" range="{{relationOptions}}" value="{{relationIndex}}" bindchange="onRelationChange">
+                <view class="picker-text {{relationIndex === 0 ? 'picker-placeholder' : ''}}">
+                  {{relationOptions[relationIndex] || "请选择关系"}}
+                </view>
+              </picker>
+            </view>
+          </block>
+          <view class="form-field form-span-2" wx:else>
+            <view class="label">证明事由 / 用途</view>
+            <input class="input" value="{{formInputs.job_desc}}" data-key="job_desc" placeholder="请输入证明事由或用途" bindinput="onFormInput" />
+          </view>
+          <view class="form-field form-span-2">
+            <view class="label">补充说明 <text class="label-opt">选填</text></view>
+            <textarea class="textarea" value="{{note}}" placeholder="可补充相关情况" bindinput="onNoteInput" />
+          </view>
+          <view class="form-field form-span-2">
+            <view class="label">上传材料 <text class="label-opt">选填，最多9张</text></view>
+            <view class="photo-grid ui-mt-10">
+              <block wx:for="{{localSupportingPhotos}}" wx:key="*this">
+                <view class="photo-item">
+                  <image class="photo-image" src="{{item}}" mode="aspectFill" data-current="{{item}}" bindtap="previewSupportingPhoto" />
+                  <view class="photo-remove" data-index="{{index}}" bindtap="removeSupportingPhoto">×</view>
+                </view>
+              </block>
+              <button class="photo-add" wx:if="{{localSupportingPhotos.length < 9}}" bindtap="chooseSupportingPhotos">添加照片</button>
+            </view>
+          </view>
+        </view>
+        <button class="btn-primary ui-mt-18" bindtap="goCertificatePreview">预览证明</button>
+      </view>
+
+      <view class="card cert-preview-card" wx:if="{{selectedCertificateKey && certificateStep === 'preview'}}">
+        <view class="card-title">证明预览</view>
+        <view class="section-sub">这就是开出来的样子。村委会核验通过后，会在右下角盖电子章，你能在“我的”里查看办理结果。</view>
+        <view class="cert-preview-sheet ui-mt-14">
+          <view class="cert-preview-head">{{selectedCertificateTitle || "相关文书"}}</view>
+          <block wx:if="{{isRelationshipCertificate}}">
+            <view class="cert-preview-line">
+              兹证明：{{previewApplicantName}}，{{previewApplicantGender}}，公民身份号码{{previewApplicantIdCard || "实名身份证号自动带入"}}，系我村村民。
+            </view>
+            <view class="cert-preview-line">
+              经核实：{{formInputs.related_name || "待填写对方姓名"}}，{{formInputs.related_gender || "待确认性别"}}，公民身份号码{{formInputs.related_id_card || "待填写对方身份证号"}}，与{{formInputs.name || applicantName || "本人"}}系{{formInputs.relation_type || "待选择关系"}}关系。
+            </view>
+            <view class="cert-preview-line">上述情况属实，特此证明。</view>
+          </block>
+          <block wx:elif="{{selectedCertificateKey === 'charger_install'}}">
+            <view class="cert-preview-line">
+              兹有我村村民{{previewApplicantName}}，{{previewApplicantGender}}，公民身份号码{{previewApplicantIdCard || "实名身份证号自动带入"}}。
+            </view>
+            <view class="cert-preview-line" wx:if="{{formInputs.job_desc}}">现因{{formInputs.job_desc}}，申请办理个人充电桩安装相关手续。</view>
+            <view class="cert-preview-line muted-preview" wx:else>现因待填写用途，申请办理个人充电桩安装相关手续。</view>
+            <view class="cert-preview-line">经核实，该申请人身份及申请事项属实，我村对其按规定办理个人充电桩安装相关手续无异议。</view>
+            <view class="cert-preview-line">特此同意。</view>
+          </block>
+          <block wx:else>
+            <view class="cert-preview-line">
+              兹证明：{{previewApplicantName}}，{{previewApplicantGender}}，公民身份号码{{previewApplicantIdCard || "实名身份证号自动带入"}}，系我村村民。
+            </view>
+            <view class="cert-preview-line" wx:if="{{formInputs.job_desc}}">因{{formInputs.job_desc}}需要，现申请出具{{selectedCertificateTitle || "相关证明"}}。</view>
+            <view class="cert-preview-line muted-preview" wx:else>因待填写事由需要，现申请出具{{selectedCertificateTitle || "相关证明"}}。</view>
+            <view class="cert-preview-line">上述情况属实，特此证明。</view>
+          </block>
+          <view class="cert-preview-sign">上塔市镇得胜村村民委员会</view>
+          <view class="cert-preview-date">日期：审核通过后自动生成</view>
+          <view class="cert-preview-seal">待盖章</view>
+        </view>
+        <view class="review-note">村委会会在 1 个工作日内审核，通过后给你发微信通知，不用一直守着。</view>
+        <view class="cert-preview-actions">
+          <button class="btn-secondary" disabled="{{submitting}}" bindtap="editCertificateFromPreview">返回修改</button>
+          <button class="btn-primary" loading="{{submitting}}" disabled="{{submitting}}" bindtap="submitCertificate">提交申请</button>
+        </view>
+      </view>
+    </block>
+
+    <block wx:if="{{detail && detail.detail_type === 'info_apply'}}">
+      <view class="card">
+        <view class="card-title">填写事项信息</view>
+        <view class="section-sub">申请人信息和事项内容一起填写，提交后可在下方查看办理进度。</view>
+        <view class="autofill-tip">姓名和实名手机号会自动带入；如需修改，可在下方调整。</view>
+        <view class="form-grid ui-mt-14">
+          <view class="form-field">
+            <view class="label">姓名</view>
+            <input class="input" value="{{applicantName}}" placeholder="请输入姓名" bindinput="onApplicantNameInput" />
+          </view>
+          <view class="form-field">
+            <view class="label">联系电话</view>
+            <input
+              class="input"
+              type="text"
+              maxlength="13"
+              value="{{applicantPhone}}"
+              placeholder="不填则使用实名绑定手机号"
+              bindinput="onApplicantPhoneInput"
+            />
+          </view>
+          <block wx:for="{{infoFormFields}}" wx:key="key">
+            <view class="form-field {{item.is_address ? 'form-span-2' : ''}}">
+              <view class="label">{{item.label}}</view>
+              <block wx:if="{{item.is_gender}}">
+                <picker
+                  class="picker"
+                  mode="selector"
+                  range="{{certGenderOptions}}"
+                  value="{{infoGenderIndexMap[item.key]}}"
+                  data-key="{{item.key}}"
+                  bindchange="onInfoGenderChange"
+                >
+                  <view class="picker-text">{{certGenderOptions[infoGenderIndexMap[item.key]] || "未知"}}</view>
+                </picker>
+              </block>
+
+              <block wx:elif="{{item.is_address}}">
+                <view class="form-grid address-grid">
+                  <view class="form-field">
+                    <picker
+                      class="picker"
+                      mode="region"
+                      value="{{addressRegionMap[item.key]}}"
+                      data-key="{{item.key}}"
+                      bindchange="onAddressRegionChange"
+                    >
+                      <view class="address-picker-text {{!addressRegionTextMap[item.key] ? 'is-placeholder' : ''}}">
+                        {{addressRegionTextMap[item.key] || "选择省 / 市 / 区县"}}
+                      </view>
+                    </picker>
+                  </view>
+                  <view class="form-field">
+                    <picker
+                      class="picker"
+                      mode="selector"
+                      range="{{villageGroupOptions}}"
+                      value="{{addressVillageIndexMap[item.key] || 0}}"
+                      data-key="{{item.key}}"
+                      bindchange="onAddressVillageChange"
+                    >
+                      <view class="address-picker-text {{!(addressVillageMap[item.key]) ? 'is-placeholder' : ''}}">
+                        {{addressVillageMap[item.key] || "选择村组"}}
+                      </view>
+                    </picker>
+                  </view>
+                </view>
+                <input
+                  class="input ui-mt-12"
+                  value="{{addressDetailMap[item.key]}}"
+                  data-key="{{item.key}}"
+                  placeholder="{{item.placeholder || '请输入详细地址'}}"
+                  bindinput="onAddressDetailInput"
+                />
+              </block>
+
+              <block wx:else>
+                <input
+                  class="input"
+                  value="{{formInputs[item.key]}}"
+                  data-key="{{item.key}}"
+                  placeholder="{{item.placeholder || item.label}}"
+                  bindinput="onFormInput"
+                />
+              </block>
+            </view>
+          </block>
+
+          <view class="form-field form-span-2">
+            <view class="label">补充说明</view>
+            <textarea class="textarea" value="{{note}}" placeholder="选填，可补充相关情况" bindinput="onNoteInput" />
+          </view>
+        </view>
+        <button class="btn-primary ui-mt-18" loading="{{submitting}}" bindtap="submitInfoApply">{{detail.action_label || "我要申请"}}</button>
+      </view>
+    </block>
+
+    <block wx:if="{{detail && detail.detail_type === 'employment_training'}}">
+      <view class="card">
+        <view class="card-title">选择办理内容</view>
+        <view class="section-sub">统一按“填信息、选内容、看记录”的顺序办理。</view>
+        <view class="training-tabs ui-mt-14">
+          <view class="training-tab {{trainingTab==='job' ? 'active' : ''}}" data-tab="job" bindtap="switchTrainingTab">我要就业</view>
+          <view class="training-tab {{trainingTab==='training' ? 'active' : ''}}" data-tab="training" bindtap="switchTrainingTab">我要培训</view>
+        </view>
+
+        <block wx:if="{{trainingTab==='job'}}">
+          <block wx:if="{{detail.detail_payload.jobs && detail.detail_payload.jobs.length}}">
+            <view class="section-sub">点击岗位卡片即可选择报名岗位。</view>
+            <block wx:for="{{detail.detail_payload.jobs}}" wx:key="job_key">
+              <view
+                class="job-item {{selectedJobKey===item.job_key ? 'active' : ''}}"
+                data-job-key="{{item.job_key}}"
+                data-job-title="{{item.title}}"
+                bindtap="chooseJob"
+              >
+                <view class="job-row">
+                  <view class="job-company">{{item.company}}</view>
+                  <view class="job-salary">{{item.salary}}</view>
+                </view>
+                <view class="job-title">{{item.title}}（{{item.headcount}}人）</view>
+                <view class="job-meta">{{item.contact_name}} {{item.contact_phone_text || item.contact_phone}}</view>
+                <view class="job-meta">{{item.description}}</view>
+              </view>
+            </block>
+            <view class="form-field form-span-2 ui-mt-14">
+              <view class="label">补充说明</view>
+              <textarea class="textarea" value="{{note}}" placeholder="选填，可补充求职意向" bindinput="onNoteInput" />
+            </view>
+            <button class="btn-primary ui-mt-18" loading="{{submitting}}" bindtap="submitTrainingApply">报名岗位</button>
+          </block>
+          <view class="job-empty" wx:else>
+            <view class="job-empty-title">暂时没有就业信息</view>
+            <view class="section-sub">如需找工作，可先电话联系村部，后续有新岗位会在这里同步展示。</view>
+          </view>
+        </block>
+
+        <block wx:if="{{trainingTab==='training'}}">
+          <view class="section-sub">{{detail.detail_payload.training_intro}}</view>
+          <view class="card training-option-card">
+            <view class="label">培训类型</view>
+            <checkbox-group bindchange="onTrainingOptionsChange">
+              <view class="training-option-grid">
+                <label class="training-option" wx:for="{{detail.detail_payload.training_options}}" wx:key="*this">
+                  <checkbox value="{{item}}" checked="{{selectedTrainingOptions.indexOf(item) !== -1}}" />
+                  <text>{{item}}</text>
+                </label>
+              </view>
+            </checkbox-group>
+          </view>
+          <view class="form-field form-span-2 ui-mt-14">
+            <view class="label">补充说明</view>
+            <textarea class="textarea" value="{{note}}" placeholder="选填，可补充培训需求" bindinput="onNoteInput" />
+          </view>
+          <button class="btn-primary ui-mt-18" loading="{{submitting}}" bindtap="submitTrainingApply">提交培训申请</button>
+        </block>
+      </view>
+    </block>
+  </view>
+</view>

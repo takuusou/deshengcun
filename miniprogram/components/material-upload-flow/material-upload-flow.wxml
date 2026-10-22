@@ -1,0 +1,104 @@
+<view class="material-flow-page">
+  <view class="h-brand">
+    <view class="h-brand-title">{{flowConfig.title}}</view>
+    <view class="h-brand-sub">{{flowConfig.subtitle}}</view>
+  </view>
+
+  <view class="flow-body" wx:if="{{step === 'prepare'}}">
+    <view class="intro-card">
+      <view class="intro-mark">•</view>
+      <view class="intro-text">{{flowConfig.introText}}</view>
+    </view>
+
+    <view class="section-title-row">
+      <view class="section-bar"></view>
+      <view class="section-title">材料清单</view>
+      <view class="section-count">共 {{totalCount}} 项</view>
+    </view>
+
+    <view class="material-list">
+      <block wx:for="{{materials}}" wx:key="key">
+        <view class="material-row">
+          <view class="material-index">{{item.index}}</view>
+          <view class="material-name">{{item.name}}</view>
+          <view class="material-desc">{{item.desc}}</view>
+        </view>
+      </block>
+    </view>
+
+    <button class="primary-btn" bindtap="startUpload">材料已准备好，下一步</button>
+  </view>
+
+  <view class="flow-body" wx:elif="{{step === 'upload'}}">
+    <view class="progress-card">
+      <view class="progress-head">
+        <view class="progress-title">上传进度</view>
+        <view class="progress-count">{{uploadedCount}} / {{totalCount}} 已上传</view>
+      </view>
+      <view class="progress-nodes">
+        <block wx:for="{{materials}}" wx:key="key">
+          <view class="progress-node {{item.nodeClass}}">
+            <view class="progress-link {{item.linkClass}}"></view>
+            <view class="progress-dot">{{item.done ? "✓" : item.index}}</view>
+            <view class="progress-label">{{item.shortName}}</view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <view class="upload-card" wx:if="{{currentMaterial}}">
+      <view class="upload-tag">第 {{currentMaterial.index}} 项</view>
+      <view class="upload-title">{{currentMaterial.name}}</view>
+      <view class="upload-desc">{{currentMaterial.desc}}</view>
+
+      <view class="photo-grid">
+        <block wx:for="{{currentMaterial.photos}}" wx:key="*this">
+          <view class="photo-item">
+            <image class="photo-img" src="{{item}}" mode="aspectFill" data-current="{{item}}" bindtap="previewCurrentPhoto" />
+            <view class="photo-remove" data-index="{{index}}" bindtap="removeCurrentPhoto">×</view>
+          </view>
+        </block>
+        <button class="photo-add" bindtap="chooseCurrentPhotos">
+          <view class="photo-plus">+</view>
+          <view class="photo-text">拍照/相册</view>
+        </button>
+      </view>
+
+      <view class="upload-hint">可上传多张，看不清可重拍。如无此项，可直接点下一项。</view>
+    </view>
+
+    <button class="primary-btn" bindtap="goNextMaterial">{{nextButtonText}}</button>
+  </view>
+
+  <view class="done-body" wx:else>
+    <view class="done-check">
+      <view class="done-check-inner">✓</view>
+    </view>
+    <view class="done-title">{{flowConfig.doneTitle}}</view>
+    <view class="done-message">{{flowConfig.doneMessage}}</view>
+
+    <view class="receipt-card">
+      <view class="receipt-head">
+        <view>材料回执清单</view>
+        <view class="receipt-ok">{{receiptItems.length}} 项已上传</view>
+      </view>
+      <block wx:if="{{!receiptItems.length}}">
+        <view class="receipt-empty">{{flowConfig.emptyReceiptText}}</view>
+      </block>
+      <block wx:else>
+        <block wx:for="{{receiptItems}}" wx:key="key">
+          <view class="receipt-row">
+            <view class="receipt-dot">✓</view>
+            <view class="receipt-name">{{item.name}}</view>
+            <view class="receipt-count">{{item.count}} 张</view>
+          </view>
+        </block>
+      </block>
+    </view>
+
+    <view class="done-actions">
+      <button class="ghost-btn" bindtap="returnBack">返回</button>
+      <button class="primary-btn compact" bindtap="viewMySubmissions">查看我的提交</button>
+    </view>
+  </view>
+</view>

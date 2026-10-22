@@ -1,0 +1,54 @@
+.DS_Store
+
+# Never publish private data, credentials, local settings or deployment archives.
+.env
+.env.*
+!.env.example
+**/project.private.config.json
+*.csv
+*.xls
+*.pem
+*.key
+*.p12
+*.pfx
+*.zip
+*.tar
+*.gz
+run_local.sh
+
+# Real environment secrets
+backend/.env*
+!backend/.env.example
+web-admin/.env*
+!web-admin/.env.example
+
+# Python runtime artifacts
+backend/.venv/
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+**/.pytest_cache/
+.coverage
+htmlcov/
+
+# Local runtime data
+.local_runtime/
+*.pid
+*.log
+backend/data/*.db
+backend/data/backups/*.db
+backend/data/*roster*.csv
+*.sqlite
+*.sqlite3
+backend/uploads/
+backend/uploads_local/
+*.xlsx
+*.download
+*.part
+
+# Frontend dependencies and build output
+web-admin/node_modules/
+web-admin/dist/
+web-admin/.vite/
+web-admin/.cache/
+miniprogram/config/env.local.js

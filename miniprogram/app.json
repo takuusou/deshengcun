@@ -1,0 +1,72 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/entry/entry",
+    "pages/service/service",
+    "pages/dibao/dibao",
+    "pages/tekun/tekun",
+    "pages/open/open",
+    "pages/volunteers/volunteers",
+    "pages/services/training/training",
+    "pages/services/volunteer/volunteer",
+    "pages/services/proposal/proposal",
+    "pages/shop/shop",
+    "pages/shop-detail/shop-detail",
+    "pages/handling-record-detail/handling-record-detail",
+    "pages/me/me",
+    "pages/help/help",
+    "pages/privacy/privacy",
+    "pages/result/result",
+    "pages/requests/requests",
+    "pages/notices/notices",
+    "pages/notice-detail/notice-detail",
+    "pages/gov-service-detail/gov-service-detail"
+  ],
+  "subpackages": [],
+  "preloadRule": {},
+  "window": {
+    "navigationBarTitleText": "得胜服务通",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#A09890",
+    "selectedColor": "#A63D2F",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "assets/tabbar/home.png",
+        "selectedIconPath": "assets/tabbar/home-active.png"
+      },
+      {
+        "pagePath": "pages/service/service",
+        "text": "办理",
+        "iconPath": "assets/tabbar/volunteer.png",
+        "selectedIconPath": "assets/tabbar/volunteer-active.png"
+      },
+      {
+        "pagePath": "pages/open/open",
+        "text": "公开",
+        "iconPath": "assets/tabbar/meeting.png",
+        "selectedIconPath": "assets/tabbar/meeting-active.png"
+      },
+      {
+        "pagePath": "pages/shop/shop",
+        "text": "好物",
+        "iconPath": "assets/tabbar/shop.png",
+        "selectedIconPath": "assets/tabbar/shop-active.png"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "text": "我的",
+        "iconPath": "assets/tabbar/ledger.png",
+        "selectedIconPath": "assets/tabbar/ledger-active.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,28 @@
+<view class="detail-page" wx:if="{{detail}}">
+  <view class="detail-hero">
+    <view class="detail-hero-ring detail-hero-ring--a"></view>
+    <view class="detail-hero-ring detail-hero-ring--b"></view>
+    <view class="detail-hero-eyebrow">得胜好物</view>
+    <view class="detail-hero-title hero-title">{{detail.title}}</view>
+    <view class="detail-hero-sub">{{detail.subtitle}}</view>
+  </view>
+
+  <view class="detail-body">
+    <image
+      wx:if="{{detail.detail_img_url}}"
+      class="detail-photo"
+      src="{{detail.detail_img_url}}"
+      mode="widthFix"
+    />
+
+    <block wx:for="{{detail.sections}}" wx:key="heading">
+      <view class="detail-section">
+        <view class="detail-section-heading">
+          <view class="detail-section-dot"></view>
+          <view class="detail-section-heading-text">{{item.heading}}</view>
+        </view>
+        <view class="detail-section-body">{{item.body}}</view>
+      </view>
+    </block>
+  </view>
+</view>

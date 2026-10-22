@@ -1,0 +1,147 @@
+<view class="home-page">
+
+  <!-- 品牌条 -->
+  <view class="h-brand">
+    <view class="h-brand-row">
+      <view class="h-brand-title">得胜服务通</view>
+    </view>
+  </view>
+
+  <!-- 置顶通知 Banner -->
+  <view class="h-banner-wrap">
+    <swiper
+      class="h-banner-swiper"
+      indicator-dots="{{false}}"
+      autoplay="{{heroSlides.length > 1}}"
+      circular="{{heroSlides.length > 1}}"
+      interval="4200"
+      duration="560"
+      easing-function="easeInOutCubic"
+      previous-margin="0rpx"
+      next-margin="0rpx"
+      skip-hidden-item-layout="{{true}}"
+      bindchange="onHeroChange"
+    >
+      <block wx:for="{{heroSlides}}" wx:key="id">
+        <swiper-item>
+          <view class="h-banner {{item.url ? 'has-image' : ''}}" data-notice-id="{{item.noticeId}}" bindtap="tapHero">
+            <image wx:if="{{item.url}}" class="h-banner-img" src="{{item.url}}" mode="aspectFill" />
+            <view class="h-banner-bg"></view>
+            <view class="h-banner-body">
+              <view class="h-banner-title">{{item.title}}</view>
+            </view>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="h-banner-dots">
+      <block wx:for="{{heroSlides}}" wx:key="id" wx:for-item="dot" wx:for-index="di">
+        <view class="h-banner-dot {{heroCurrent === di ? 'on' : ''}}"></view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 便民电话（滚动多号码） -->
+  <view class="tel-wrap">
+    <view class="tel-icon">
+      <image class="tel-icon-svg" src="/assets/icons/phone-red.svg" mode="aspectFit" />
+    </view>
+    <view class="tel-info">
+      <swiper
+        class="tel-roll"
+        vertical="{{true}}"
+        autoplay="{{true}}"
+        circular="{{true}}"
+        interval="3000"
+        duration="400"
+        current="{{phoneCurrent}}"
+        bindchange="onPhoneChange"
+      >
+        <block wx:for="{{phoneItems}}" wx:key="num">
+          <swiper-item>
+            <view class="tel-roll-item">
+              <view class="tel-label">
+                <view class="tel-tag" wx:if="{{item.tag}}">{{item.tag}}</view>
+                <text>{{item.tagLabel}}</text>
+              </view>
+              <view class="tel-num">{{item.num}}</view>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <button class="tel-call" bindtap="callCurrentPhone">
+      <image class="tel-call-icon" src="/assets/icons/phone-white.svg" mode="aspectFit" />
+      <text>拨打</text>
+    </button>
+  </view>
+
+  <!-- 便民服务 4列 -->
+  <view class="sec-head">
+    <view class="sec-head-l">
+      <view class="sec-bar"></view>
+      <view class="sec-title">便民服务</view>
+    </view>
+  </view>
+  <view class="svc-grid-4">
+    <block wx:for="{{miniProgramLinks}}" wx:key="key">
+      <view class="svc-cell" data-key="{{item.key}}" bindtap="openMiniProgramLink">
+        <view class="svc-cell-icon svc-cell-icon-wrap">
+          <image class="svc-cell-img" src="{{item.iconSrc}}" mode="aspectFit" />
+          <view class="svc-badge"></view>
+        </view>
+        <view class="svc-cell-name">{{item.title}}</view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 历史通知 -->
+  <view class="sec-head">
+    <view class="sec-head-l">
+      <view class="sec-bar"></view>
+      <view class="sec-title">历史通知</view>
+    </view>
+    <view class="sec-more" bindtap="goMoreNotices">查看全部 ›</view>
+  </view>
+
+  <view class="notice-list" wx:if="{{noticeItems.length}}">
+    <block wx:for="{{noticeItems}}" wx:key="id">
+      <view class="notice-item" data-id="{{item.id}}" bindtap="openNoticeDetail">
+        <view class="notice-body">
+          <view class="notice-title">{{item.title}}</view>
+          <view class="notice-time">{{item.timeText}}</view>
+        </view>
+        <view class="notice-arrow">›</view>
+      </view>
+    </block>
+  </view>
+
+  <view class="notice-empty" wx:else>
+    <view class="notice-empty-illust">
+      <image class="notice-empty-icon" src="/assets/icons/document.svg" mode="aspectFit" />
+    </view>
+    <view class="notice-empty-title">暂无通知</view>
+    <view class="notice-empty-desc">村委暂未发布公告内容</view>
+  </view>
+
+  <!-- 通知订阅 CTA -->
+  <view class="notify-cta">
+    <view class="notify-cta-row">
+      <view class="notify-cta-icon">
+        <image class="notify-cta-icon-img" src="/assets/icons/bell-gray.svg" mode="aspectFit" />
+      </view>
+      <view class="notify-cta-text">
+        <view class="notify-cta-title">村务通知提醒</view>
+        <view class="notify-cta-desc">{{noticeSubscribeHint}}</view>
+      </view>
+    </view>
+    <button
+      class="notify-cta-btn"
+      bindtap="goSubscribeTips"
+      loading="{{noticeSubscribeLoading}}"
+      disabled="{{noticeSubscribeLoading}}"
+    >{{noticeSubscribeButtonText}}</button>
+  </view>
+
+  <view style="height:16px;"></view>
+</view>

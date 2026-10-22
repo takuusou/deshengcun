@@ -1,0 +1,88 @@
+<view class="entry-page">
+  <view class="entry-hero">
+    <view class="entry-hero-title">得胜服务通</view>
+    <view class="entry-hero-sub">村民登录认证中心（三步完成）</view>
+    <view class="entry-hero-status">
+      <text>您可先浏览小程序内容；办理证明、诉求和活动报名时，再完成这里的基础实名登记。</text>
+    </view>
+  </view>
+
+  <view class="entry-steps">
+    <view
+      class="entry-step {{currentStep==1 ? 'active' : ''}} {{step1Done ? 'done' : ''}}"
+      data-step="1"
+      bindtap="goStep"
+    >
+      <view class="entry-step-index">1</view>
+      <view class="entry-step-title">微信登录</view>
+    </view>
+    <view class="entry-step-line"></view>
+    <view
+      class="entry-step {{currentStep==2 ? 'active' : ''}} {{step2Done ? 'done' : ''}}"
+      data-step="2"
+      bindtap="goStep"
+    >
+      <view class="entry-step-index">2</view>
+      <view class="entry-step-title">绑定手机</view>
+    </view>
+    <view class="entry-step-line"></view>
+    <view
+      class="entry-step {{currentStep==3 ? 'active' : ''}} {{step3Done ? 'done' : ''}}"
+      data-step="3"
+      bindtap="goStep"
+    >
+      <view class="entry-step-index">3</view>
+      <view class="entry-step-title">基础实名登记</view>
+    </view>
+  </view>
+
+  <view class="entry-card" wx:if="{{currentStep==1}}">
+    <view class="entry-card-title">第一步：微信登录</view>
+    <view class="muted">点一次“微信一键登录”，再点一次“同意并继续”。</view>
+
+    <button class="btn-primary mt-12" wx:if="{{!isLoggedIn}}" bindtap="wechatLogin">微信一键登录</button>
+    <view class="entry-login-ok" wx:if="{{isLoggedIn}}">
+      <view class="entry-login-name">{{displayName}}</view>
+      <view class="entry-login-meta">已完成微信登录</view>
+    </view>
+
+    <view class="entry-consent-box" wx:if="{{isLoggedIn}}">
+      <view class="entry-consent-row">隐私政策、实名信息处理授权：{{consentSummaryText}}</view>
+      <text class="policy-link" bindtap="showPolicyDialog">查看隐私政策全文</text>
+      <button class="btn-secondary mt-12" bindtap="agreeAllConsents">同意并继续</button>
+    </view>
+  </view>
+
+  <view class="entry-card" wx:if="{{currentStep==2}}">
+    <view class="entry-card-title">第二步：绑定手机号</view>
+    <view class="muted">请点击下方按钮，使用微信官方手机号快速验证完成绑定。</view>
+    <button
+      class="btn-secondary mt-12"
+      open-type="getPhoneNumber"
+      bindgetphonenumber="bindPhoneByWechat"
+    >
+      微信验证手机号
+    </button>
+    <view class="entry-inline-info" wx:if="{{profile && profile.phone_bound}}">
+      当前已验证：{{boundPhoneText || profile.phone}}
+    </view>
+  </view>
+
+  <view class="entry-card" wx:if="{{currentStep==3}}">
+    <view class="entry-card-title">第三步：基础实名登记</view>
+    <view class="muted">填写真实姓名和身份证号，完成身份信息登记。</view>
+
+    <input class="input mt-12" value="{{realNameInput}}" placeholder="真实姓名" bindinput="onRealNameInput" />
+    <input class="input mt-12" value="{{idCardInput}}" placeholder="身份证号" bindinput="onIdCardInput" />
+    <button class="btn-primary mt-12" bindtap="submitRealname">提交信息并进入</button>
+
+    <view class="entry-inline-info">登记状态：{{realnameStatusText}}</view>
+    <view class="entry-inline-info">名单核验：{{rosterMatchStatusText}}</view>
+    <view class="entry-inline-info">当前状态：{{authStatusText}}</view>
+  </view>
+
+  <view class="entry-bottom-actions" wx:if="{{isLoggedIn}}">
+    <button class="btn-secondary entry-bottom-btn" bindtap="logout">退出登录</button>
+    <button class="withdraw-btn entry-bottom-btn" bindtap="withdrawAllConsents">撤回授权并清空认证</button>
+  </view>
+</view>

@@ -1,0 +1,232 @@
+page {
+  background: #f6f4ef;
+}
+
+.detail-page {
+  min-height: 100vh;
+  background: #f6f4ef;
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-scroll {
+  flex: 1;
+  padding: 28rpx 28rpx 36rpx;
+}
+
+.detail-loading {
+  text-align: center;
+  color: #b8afa3;
+  font-size: 26rpx;
+  padding: 120rpx 0;
+}
+
+/* 状态头 */
+.d-statehead {
+  background: #fff;
+  border: 1rpx solid #e8e0d0;
+  border-radius: 22rpx;
+  padding: 36rpx 28rpx;
+  text-align: center;
+  margin-bottom: 22rpx;
+}
+.d-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10rpx;
+  font-size: 24rpx;
+  font-weight: 600;
+  padding: 10rpx 26rpx;
+  border-radius: 999rpx;
+  margin-bottom: 22rpx;
+}
+.d-badge-dot {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+}
+.d-badge-done {
+  color: #3d6b45;
+  background: #e8f0e8;
+}
+.d-badge-done .d-badge-dot {
+  background: #3d6b45;
+}
+.d-badge-doing {
+  color: #b07a28;
+  background: #f7edd8;
+}
+.d-badge-doing .d-badge-dot {
+  background: #b07a28;
+}
+.d-badge-back {
+  color: #a63d2f;
+  background: #f5e8e6;
+}
+.d-badge-back .d-badge-dot {
+  background: #a63d2f;
+}
+.d-h1 {
+  font-family: "Songti SC", "STSong", serif;
+  font-size: 36rpx;
+  color: #1a1612;
+  font-weight: 600;
+  margin-bottom: 14rpx;
+  line-height: 1.4;
+}
+.d-meta {
+  font-size: 23rpx;
+  color: #b8afa3;
+  letter-spacing: 0.5rpx;
+}
+
+/* 区块 */
+.d-block {
+  background: #fff;
+  border: 1rpx solid #e8e0d0;
+  border-radius: 22rpx;
+  padding: 28rpx 28rpx 30rpx;
+  margin-bottom: 22rpx;
+}
+.d-bt {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 20rpx;
+}
+.d-bar {
+  width: 6rpx;
+  height: 26rpx;
+  background: #a63d2f;
+  border-radius: 3rpx;
+}
+.d-bt-title {
+  font-family: "Songti SC", "STSong", serif;
+  font-size: 28rpx;
+  color: #1a1612;
+  font-weight: 600;
+}
+.d-reply {
+  font-size: 27rpx;
+  color: #3a332c;
+  line-height: 1.85;
+}
+.d-reply-muted {
+  color: #b8afa3;
+}
+
+/* 提交内容回看 */
+.d-field {
+  display: flex;
+  gap: 20rpx;
+  padding: 18rpx 0;
+  border-bottom: 1rpx solid #f0ece2;
+  font-size: 26rpx;
+}
+.d-field:last-child {
+  border-bottom: none;
+}
+.d-field-k {
+  color: #7a6e64;
+  min-width: 120rpx;
+  flex-shrink: 0;
+}
+.d-field-v {
+  color: #3a332c;
+  flex: 1;
+  line-height: 1.7;
+}
+/* 材料清单（低保/特困） */
+.d-materials {
+  margin-top: 4rpx;
+}
+.d-mat-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #f0ece2;
+  font-size: 26rpx;
+}
+.d-mat-row:last-child {
+  border-bottom: none;
+}
+.d-mat-name {
+  color: #3a332c;
+}
+.d-mat-count {
+  color: #7a6e64;
+}
+
+/* 电子证明 */
+.d-cert-imgs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14rpx;
+}
+.d-cert-img {
+  width: 200rpx;
+  height: 264rpx;
+  border-radius: 12rpx;
+  background: #fffdf8;
+  border: 1rpx solid #e6e1d6;
+  padding: 8rpx;
+  box-sizing: border-box;
+}
+.d-cert-actions {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 22rpx;
+}
+.d-cert-btn {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 16rpx;
+  background: #a63d2f;
+  color: #fff;
+  font-size: 27rpx;
+}
+.d-cert-btn.ghost {
+  background: #fff;
+  color: #3a332c;
+  border: 1rpx solid #e8e0d0;
+}
+
+.d-imgs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14rpx;
+  margin-top: 18rpx;
+}
+.d-img {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 12rpx;
+  background: #f6f4ef;
+  border: 1rpx solid #e6e1d6;
+}
+
+/* 退回重提 */
+.d-resubmit {
+  position: sticky;
+  bottom: 0;
+  padding: 20rpx 28rpx calc(20rpx + env(safe-area-inset-bottom));
+  background: linear-gradient(to top, #f6f4ef 70%, rgba(246, 244, 239, 0));
+}
+.d-resubmit-btn {
+  width: 100%;
+  height: 92rpx;
+  line-height: 92rpx;
+  border-radius: 22rpx;
+  background: #a63d2f;
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: 500;
+  letter-spacing: 2rpx;
+  box-shadow: 0 12rpx 24rpx -14rpx rgba(166, 61, 47, 0.6);
+}
+.d-resubmit-btn::after {
+  border: none;
+}

@@ -1,0 +1,15 @@
+<view class="help-page">
+  <view class="help-list">
+    <block wx:for="{{sections}}" wx:key="title">
+      <view class="help-card">
+        <view class="help-card-title">{{item.title}}</view>
+        <block wx:for="{{item.items}}" wx:key="*this" wx:for-item="line">
+          <view class="help-line">
+            <view class="help-dot"></view>
+            <view class="help-line-text">{{line}}</view>
+          </view>
+        </block>
+      </view>
+    </block>
+  </view>
+</view>

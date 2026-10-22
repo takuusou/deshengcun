@@ -1,0 +1,20 @@
+<view class="privacy-page">
+  <block wx:for="{{sections}}" wx:key="title" wx:for-item="section">
+    <view class="privacy-card">
+      <view class="privacy-section-title">{{section.title}}</view>
+      <view
+        class="privacy-text privacy-paragraph"
+        wx:for="{{section.paragraphs}}"
+        wx:key="*this"
+        wx:for-item="paragraph"
+      >{{paragraph}}</view>
+    </view>
+  </block>
+
+  <view class="privacy-card privacy-error" wx:if="{{loadFailed}}">
+    <view class="privacy-section-title">暂时无法加载</view>
+    <view class="privacy-text">请稍后重试，或通过首页公布的村委会服务电话联系村委会。</view>
+  </view>
+
+  <view class="muted ui-loading-inline" wx:if="{{loading}}">加载中...</view>
+</view>

@@ -1,0 +1,88 @@
+.result-page {
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.result-wrap {
+  padding: 72rpx 56rpx 40rpx;
+  text-align: center;
+}
+
+.result-icon {
+  width: 176rpx;
+  height: 176rpx;
+  margin: 0 auto 40rpx;
+  border-radius: 999rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3rpx solid rgba(61, 107, 53, 0.2);
+  background: var(--matcha-bg);
+  color: var(--matcha);
+  font-size: 76rpx;
+  font-weight: 700;
+}
+
+.result-icon.fail {
+  border-color: rgba(166, 61, 47, 0.2);
+  background: var(--beni-pale);
+  color: var(--beni);
+}
+
+.result-title {
+  font-family: 'STSong', 'Songti SC', serif;
+  font-size: 40rpx;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 4rpx;
+}
+
+.result-desc {
+  margin-top: 18rpx;
+  font-size: 26rpx;
+  line-height: 1.7;
+  color: var(--ink-3);
+}
+
+.result-info-card {
+  margin: 52rpx 0 36rpx;
+  padding: 22rpx 28rpx;
+  background: var(--bg-2);
+  border: 1rpx solid var(--line-2);
+  border-radius: 20rpx;
+  text-align: left;
+}
+
+.result-info-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 24rpx;
+  padding: 14rpx 0;
+  border-bottom: 1rpx solid var(--line);
+}
+
+.result-info-row:last-child {
+  border-bottom: 0;
+}
+
+.result-info-label {
+  font-size: 24rpx;
+  color: var(--ink-3);
+  flex-shrink: 0;
+}
+
+.result-info-value {
+  font-size: 25rpx;
+  color: var(--ink);
+  font-weight: 500;
+  text-align: right;
+}
+
+.result-actions {
+  display: flex;
+  gap: 20rpx;
+}
+
+.result-actions button {
+  flex: 1;
+}

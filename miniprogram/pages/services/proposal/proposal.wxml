@@ -1,0 +1,59 @@
+<view class="proposal-page">
+  <view class="proposal-brand v11-hero v11-hero--square-centered">
+    <view class="v11-topbar-ring v11-topbar-ring--large"></view>
+    <view class="v11-topbar-ring v11-topbar-ring--small"></view>
+    <view class="v11-hero-copy">
+      <view class="v11-hero-title">建议</view>
+      <view class="v11-hero-sub">村务 · 民意 · 共建</view>
+    </view>
+  </view>
+
+  <block wx:if="{{alreadyToday}}">
+    <view class="proposal-body">
+      <view class="success">
+        <view class="succ-icon">☀</view>
+        <view class="succ-title">今天您已提交哦</view>
+        <view class="succ-text">每人每天提交一条建议就够啦，\n明天再来吧！村委都会看到。</view>
+        <button class="succ-btn" bindtap="goBack">返回</button>
+      </view>
+    </view>
+  </block>
+
+  <block wx:elif="{{!submitted}}">
+    <view class="proposal-body">
+      <view class="lead">对村里的事有什么想法、意见或建议，都可以写下来。<text class="hl">您说的，村委都会看到。</text></view>
+
+      <view class="anon">
+        <view class="anon-icon">🔒</view>
+        <text class="anon-text">仅限完成实名登记的本村村民提交；村委不会对外公开您的身份。</text>
+      </view>
+
+      <view class="field-label">
+        <view class="label-bar"></view>
+        <view class="label-title">我的建议</view>
+      </view>
+
+      <textarea
+        class="proposal-textarea"
+        value="{{content}}"
+        placeholder="比如：村里某段路灯坏了想修一下、自来水水压有点小、希望多办点敬老活动……&#10;&#10;一句两句也行，村委都会看。"
+        maxlength="{{maxLen}}"
+        bindinput="onContentInput"
+      />
+      <view class="counter">{{count}} / {{maxLen}}</view>
+
+      <button class="submit-btn" loading="{{submitting}}" bindtap="submitProposal">提交建议</button>
+    </view>
+  </block>
+
+  <block wx:else>
+    <view class="proposal-body">
+      <view class="success">
+        <view class="succ-icon">✓</view>
+        <view class="succ-title">已收到</view>
+        <view class="succ-text">感谢您的建议，村委会已经收到。\n村里的事，我们会一件一件慢慢改善。</view>
+        <button class="succ-btn" bindtap="goBack">返回</button>
+      </view>
+    </view>
+  </block>
+</view>

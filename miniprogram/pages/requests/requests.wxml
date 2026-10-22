@@ -1,0 +1,90 @@
+<view class="v11-page has-fixed-topbar">
+  <view class="v11-topbar v11-topbar--square-centered">
+    <view class="v11-topbar-ring v11-topbar-ring--large"></view>
+    <view class="v11-topbar-ring v11-topbar-ring--small"></view>
+    <view class="v11-topbar-copy">
+      <view class="v11-topbar-row">
+        <view class="v11-topbar-title">{{isSnapshotMode ? "随手拍" : "诉求服务"}}</view>
+      </view>
+      <view class="v11-topbar-sub">{{isSnapshotMode ? "拍下现场情况，村委收到后尽快处理" : "问题投诉、服务需求提交与进度跟踪"}}</view>
+    </view>
+  </view>
+
+  <view class="v11-content">
+    <view class="card" wx:if="{{!canSubmitRequest}}">
+      <view class="card-title">完成基础实名登记后可提交诉求</view>
+      <view class="muted">浏览小程序不需要登录，但提交投诉、服务需求和上传图片前，需要先完成基础实名登记。</view>
+      <button class="btn-secondary ui-mt-14" bindtap="goAuthCenter">去登记身份信息</button>
+    </view>
+
+    <view class="card">
+      <view class="card-title">{{isSnapshotMode ? "现场上报" : "填写信息"}}</view>
+      <view class="muted">{{isSnapshotMode ? "照片会自动带入表单，只需要补充现场情况。" : "先把诉求情况填清楚，提交后可在办理记录页查看进度。"}}</view>
+      <view class="snapshot-tip" wx:if="{{isSnapshotMode}}">
+        已实名信息会自动随记录提交，无需再次填写姓名和联系方式。
+      </view>
+      <view class="field" wx:if="{{!isSnapshotMode}}">
+        <text class="label">诉求类型</text>
+        <radio-group bindchange="onTypeChange">
+          <view class="request-type-row">
+            <block wx:for="{{requestTypeOptions}}" wx:key="value">
+              <label class="request-type-item">
+                <radio value="{{item.value}}" checked="{{requestType === item.value}}" />
+                <text>{{item.label}}</text>
+              </label>
+            </block>
+          </view>
+        </radio-group>
+      </view>
+      <view class="field" wx:if="{{!isSnapshotMode}}">
+        <text class="label">标题</text>
+        <input class="input" value="{{title}}" placeholder="请输入标题" bindinput="onTitleInput" />
+      </view>
+      <view class="field">
+        <text class="label">{{isSnapshotMode ? "现场情况" : "内容描述"}}</text>
+        <textarea class="textarea" value="{{content}}" placeholder="{{isSnapshotMode ? '请写清楚地点、问题情况和希望村委协助处理的事项' : '请描述具体情况和诉求'}}" bindinput="onContentInput" />
+      </view>
+      <view class="field" wx:if="{{!isSnapshotMode}}">
+        <text class="label">联系电话（选填）</text>
+        <input
+          class="input"
+          type="text"
+          maxlength="13"
+          value="{{contactPhone}}"
+          placeholder="请输入本人手机号"
+          bindinput="onContactPhoneInput"
+        />
+        <view class="request-field-tip">不填则自动使用实名绑定手机号；如需换号码，可在这里修改。</view>
+      </view>
+      <view class="field">
+        <text class="label">{{isSnapshotMode ? "现场照片（最多9张）" : "图片凭证（最多9张）"}}</text>
+        <view class="photo-grid">
+          <block wx:for="{{localPhotos}}" wx:key="*this">
+            <view class="photo-item">
+              <image
+                class="photo-image"
+                src="{{item}}"
+                mode="aspectFill"
+                data-current="{{item}}"
+                bindtap="previewLocalPhoto"
+              />
+              <view class="photo-remove" data-index="{{index}}" bindtap="removeLocalPhoto">×</view>
+            </view>
+          </block>
+          <button
+            class="photo-add"
+            wx:if="{{localPhotos.length < 9}}"
+            data-source="{{isSnapshotMode ? 'camera' : ''}}"
+            bindtap="choosePhotos"
+          >
+            {{isSnapshotMode ? "+ 拍照" : "+ 添加"}}
+          </button>
+        </view>
+      </view>
+      <button class="btn-primary" loading="{{submitting}}" bindtap="submitRequest">
+        {{canSubmitRequest ? (isSnapshotMode ? "提交随手拍" : "提交诉求") : "登记身份信息后提交"}}
+      </button>
+    </view>
+
+  </view>
+</view>

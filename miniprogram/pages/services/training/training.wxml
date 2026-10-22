@@ -1,0 +1,100 @@
+<view class="training-page">
+  <view class="training-brand v11-hero v11-hero--square-centered">
+    <view class="v11-topbar-ring v11-topbar-ring--large"></view>
+    <view class="v11-topbar-ring v11-topbar-ring--small"></view>
+    <view class="v11-hero-copy">
+      <view class="v11-hero-title">就业培训</view>
+      <view class="v11-hero-sub">就业 · 培训 · 招工</view>
+    </view>
+  </view>
+
+  <view class="section-head first">
+    <view class="section-mark"></view>
+    <view class="section-title">正在招募</view>
+  </view>
+
+  <view class="loading" wx:if="{{loading && !programs.length}}">加载中...</view>
+
+  <view class="empty-card" wx:elif="{{!openPrograms.length}}">
+    <view class="empty-icon">培</view>
+    <view class="empty-title">暂无在招培训</view>
+    <view class="empty-text">有新的培训或招工机会，会第一时间发布在这里，并通过首页通知提醒您。</view>
+  </view>
+
+  <view class="program-list" wx:else>
+    <block wx:for="{{openPrograms}}" wx:key="id">
+      <view class="program-card">
+        <view class="card-top">
+          <view class="program-title">{{item.title}}</view>
+          <view class="status-tag">{{item.deadline_text}}</view>
+        </view>
+        <view class="meta-grid">
+          <block wx:for="{{item.metaRows}}" wx:key="label" wx:for-item="meta">
+            <view class="meta-row">
+              <text class="meta-label">{{meta.label}}</text>
+              <text class="meta-value">{{meta.value}}</text>
+            </view>
+          </block>
+        </view>
+        <view class="signup-count">已有 {{item.signup_count}} 人报名</view>
+        <view class="card-actions">
+          <button wx:if="{{item.signed_up}}" class="primary-action signed" disabled>已报名</button>
+          <button wx:else class="primary-action" data-id="{{item.id}}" bindtap="openSignup">我要报名</button>
+          <button class="plain-action" data-id="{{item.id}}" bindtap="callContact">联系村书记</button>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <view class="section-head past-head" wx:if="{{pastPrograms.length}}">
+    <view class="section-mark"></view>
+    <view class="section-title">往期培训</view>
+    <view class="section-more" wx:if="{{pastPrograms.length > 3}}" bindtap="togglePast">
+      {{showAllPast ? "收起" : "查看全部往期"}}
+    </view>
+  </view>
+
+  <view class="past-list" wx:if="{{pastDisplay.length}}">
+    <block wx:for="{{pastDisplay}}" wx:key="id">
+      <view class="past-card">
+        <view class="past-main">
+          <view class="past-title">{{item.title}}</view>
+          <view class="past-meta">{{item.schedule_text || "时间待补充"}} · {{item.location || "地点待补充"}}</view>
+        </view>
+        <view class="past-status">{{item.status_label}}</view>
+      </view>
+    </block>
+  </view>
+
+  <view class="sheet-mask" wx:if="{{showSignup}}" catchtap="closeSignup" catchtouchmove="noop"></view>
+  <view class="signup-sheet" wx:if="{{showSignup}}" catchtap="noop">
+    <view class="sheet-handle"></view>
+    <view class="sheet-title">报名</view>
+    <view class="sheet-program">{{selectedProgram.title}}</view>
+    <view class="sheet-time">{{selectedProgram.schedule_text || "具体时间以村委通知为准"}}</view>
+
+    <view class="field">
+      <view class="field-label">姓名 <text>*</text></view>
+      <input class="field-input" value="{{formName}}" placeholder="请输入姓名" maxlength="50" bindinput="onNameInput" />
+    </view>
+
+    <view class="field">
+      <view class="field-label">电话 <text>*</text></view>
+      <input
+        class="field-input"
+        value="{{formPhone}}"
+        type="number"
+        placeholder="请输入11位手机号"
+        maxlength="13"
+        bindinput="onPhoneInput"
+      />
+    </view>
+
+    <view class="sheet-note">报名后，您的姓名和电话会提交给村委会，由村委统一对接培训单位。村委会不收取任何费用。</view>
+
+    <view class="sheet-actions">
+      <button class="cancel-action" bindtap="closeSignup">取消</button>
+      <button class="submit-action" loading="{{submitting}}" bindtap="submitSignup">提交报名</button>
+    </view>
+  </view>
+</view>

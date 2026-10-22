@@ -1,0 +1,53 @@
+<view class="open-page">
+
+  <!-- 品牌条 -->
+  <view class="h-brand">
+    <view class="h-brand-row">
+      <view class="h-brand-title">公　开</view>
+    </view>
+  </view>
+
+  <view class="open-body">
+    <view class="open-hero" bindtap="previewCover">
+      <image
+        wx:if="{{villagePhotoUrl}}"
+        class="open-hero-image"
+        src="{{villagePhotoUrl}}"
+        mode="aspectFill"
+      />
+      <view wx:else class="open-hero-placeholder">
+        <image class="open-hero-placeholder-icon" src="/assets/icons/house.svg" mode="aspectFit" />
+        <text>村部实景照片</text>
+      </view>
+      <view class="open-hero-caption">
+        <view class="open-hero-dot"></view>
+        <text>得胜村村部</text>
+      </view>
+    </view>
+
+    <view class="open-data-bar">
+      <block wx:for="{{statsDisplay}}" wx:key="label">
+        <view class="open-data-cell">
+          <view class="open-data-icon">
+            <image src="{{item.iconSrc}}" mode="aspectFit" />
+          </view>
+          <view class="open-data-num">{{item.value}}</view>
+          <view class="open-data-label">{{item.label}}</view>
+        </view>
+      </block>
+    </view>
+
+    <view class="sec-head">
+      <view class="sec-head-l">
+        <view class="sec-bar"></view>
+        <view class="sec-title">村情简介</view>
+      </view>
+    </view>
+
+    <view class="open-intro-block">
+      <view class="open-intro-text">{{introText}}</view>
+    </view>
+  </view>
+
+  <view class="open-footer"></view>
+</view>

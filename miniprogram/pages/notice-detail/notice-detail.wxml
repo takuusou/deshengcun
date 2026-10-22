@@ -1,0 +1,33 @@
+<view class="nd-page">
+  <view wx:if="{{detail}}">
+    <!-- 头部：置顶标 + 标题 + 发布人·时间 -->
+    <view class="nd-head">
+      <view class="nd-pin" wx:if="{{detail.is_home_top}}">首页置顶</view>
+      <view class="nd-title">{{detail.title}}</view>
+      <view class="nd-meta">
+        <text wx:if="{{detail.publisher}}">{{detail.publisher}}</text>
+        <text wx:if="{{detail.publisher && detail.created_at_text}}"> · </text>
+        <text wx:if="{{detail.created_at_text}}">{{detail.created_at_text}}</text>
+      </view>
+    </view>
+
+    <!-- 正文 -->
+    <view class="nd-content">{{detail.content}}</view>
+
+    <!-- 通知配图：纵向大图 -->
+    <view class="nd-imgs" wx:if="{{detail.photo_urls && detail.photo_urls.length}}">
+      <block wx:for="{{detail.photo_urls}}" wx:key="*this">
+        <image
+          class="nd-img"
+          src="{{item}}"
+          mode="widthFix"
+          data-current="{{item}}"
+          bindtap="previewPhoto"
+        />
+      </block>
+    </view>
+
+  </view>
+
+  <view class="nd-loading" wx:if="{{loading}}">加载中...</view>
+</view>

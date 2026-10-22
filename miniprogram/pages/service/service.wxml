@@ -1,0 +1,74 @@
+<view class="svc-page">
+
+  <!-- 品牌条 -->
+  <view class="h-brand">
+    <view class="h-brand-row">
+      <view class="h-brand-title">办　理</view>
+    </view>
+  </view>
+
+  <!-- 政务办理 -->
+  <view class="sec-head sec-head-first">
+    <view class="sec-head-l">
+      <view class="sec-bar"></view>
+      <view class="sec-title">政务办理</view>
+      <view class="sec-subtitle">证明文件 · 民政救助</view>
+    </view>
+  </view>
+
+  <view class="svc-grid-4" wx:if="{{govServiceCards.length}}">
+    <block wx:for="{{govServiceCards}}" wx:key="key">
+      <view class="svc-cell" data-id="{{item.serviceId}}" data-key="{{item.key}}" bindtap="openGovService">
+        <view class="svc-cell-icon">
+          <image class="svc-cell-img" src="{{item.iconSrc}}" mode="aspectFit" />
+        </view>
+        <view class="svc-cell-name">{{item.title}}</view>
+      </view>
+    </block>
+    <!-- 空位补齐4列 -->
+    <view class="svc-cell svc-empty" wx:if="{{govServiceCards.length % 4 !== 0 && (4 - govServiceCards.length % 4) >= 1}}"></view>
+    <view class="svc-cell svc-empty" wx:if="{{govServiceCards.length % 4 !== 0 && (4 - govServiceCards.length % 4) >= 2}}"></view>
+    <view class="svc-cell svc-empty" wx:if="{{govServiceCards.length % 4 !== 0 && (4 - govServiceCards.length % 4) >= 3}}"></view>
+  </view>
+  <view class="svc-loading" wx:else>
+    <view class="muted">加载中...</view>
+  </view>
+
+  <!-- 便民协同 -->
+  <view class="sec-head">
+    <view class="sec-head-l">
+      <view class="sec-bar"></view>
+      <view class="sec-title">便民协同</view>
+      <view class="sec-subtitle">参与 · 反馈 · 上报</view>
+    </view>
+  </view>
+
+  <view class="svc-grid-4">
+    <block wx:for="{{civicCards}}" wx:key="key">
+      <view class="svc-cell" data-key="{{item.key}}" bindtap="tapCivic">
+        <view class="svc-cell-icon">
+          <image class="svc-cell-img" src="{{item.iconSrc}}" mode="aspectFit" />
+        </view>
+        <view class="svc-cell-name">{{item.title}}</view>
+      </view>
+    </block>
+    <!-- 空位补齐4列 -->
+    <view class="svc-cell svc-empty" wx:if="{{civicCards.length % 4 !== 0 && (4 - civicCards.length % 4) >= 1}}"></view>
+    <view class="svc-cell svc-empty" wx:if="{{civicCards.length % 4 !== 0 && (4 - civicCards.length % 4) >= 2}}"></view>
+    <view class="svc-cell svc-empty" wx:if="{{civicCards.length % 4 !== 0 && (4 - civicCards.length % 4) >= 3}}"></view>
+  </view>
+
+  <!-- 引导卡 -->
+  <view class="guide-card" bindtap="goMyRecords">
+    <view class="guide-icon">
+      <image class="guide-icon-img" src="/assets/icons/document.svg" mode="aspectFit" />
+    </view>
+    <view class="guide-body">
+      <view class="guide-title">查看我的办理记录</view>
+      <view class="guide-desc">申请记录 · 进度 · 结果回执</view>
+    </view>
+    <view class="guide-link">我的 ›</view>
+  </view>
+
+  <view style="height:20rpx;"></view>
+</view>

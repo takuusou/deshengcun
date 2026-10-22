@@ -1,0 +1,91 @@
+page {
+  background: #f6f4ef;
+}
+
+.notices-page {
+  min-height: 100vh;
+  background: #f6f4ef;
+}
+
+.notices-body {
+  padding: 18rpx 24rpx 40rpx;
+}
+
+.notice-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.notice-row {
+  background: #fff;
+  border: 1rpx solid #e8e0d0;
+  border-radius: 18rpx;
+  padding: 22rpx 24rpx;
+}
+
+.notice-row-1 {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 10rpx;
+}
+
+.notice-pin {
+  flex-shrink: 0;
+  font-size: 19rpx;
+  color: #a63d2f;
+  background: #f5e8e6;
+  padding: 3rpx 12rpx;
+  border-radius: 8rpx;
+}
+
+.notice-row-title {
+  flex: 1;
+  min-width: 0;
+  font-family: "Songti SC", "STSong", serif;
+  font-size: 29rpx;
+  color: #1a1612;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notice-row-desc {
+  font-size: 24rpx;
+  color: #7a6e64;
+  line-height: 1.5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 10rpx;
+}
+
+.notice-row-time {
+  font-size: 21rpx;
+  color: #b8afa3;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 140rpx 48rpx 60rpx;
+}
+.empty-illust {
+  font-size: 64rpx;
+  margin-bottom: 24rpx;
+}
+.empty-title {
+  font-size: 30rpx;
+  color: #7a6e64;
+  font-weight: 500;
+  margin-bottom: 14rpx;
+}
+.empty-desc {
+  font-size: 24rpx;
+  color: #b8afa3;
+  line-height: 1.7;
+}

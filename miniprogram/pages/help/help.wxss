@@ -1,0 +1,58 @@
+.help-page {
+  min-height: 100vh;
+  background: var(--bg);
+  padding-bottom: 48rpx;
+}
+
+.help-list {
+  padding: 28rpx 36rpx 0;
+}
+
+.help-card {
+  padding: 28rpx;
+  margin-bottom: 20rpx;
+  background: #fff;
+  border: 1rpx solid var(--line-2);
+  border-radius: 20rpx;
+}
+
+.help-card-title {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  font-family: 'STSong', 'Songti SC', serif;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 18rpx;
+}
+
+.help-card-title::before {
+  content: '';
+  width: 6rpx;
+  height: 28rpx;
+  border-radius: 3rpx;
+  background: var(--beni);
+}
+
+.help-line {
+  display: flex;
+  gap: 14rpx;
+  padding: 10rpx 0;
+}
+
+.help-dot {
+  width: 10rpx;
+  height: 10rpx;
+  margin-top: 16rpx;
+  border-radius: 999rpx;
+  background: var(--beni);
+  flex-shrink: 0;
+}
+
+.help-line-text {
+  flex: 1;
+  font-size: 26rpx;
+  line-height: 1.7;
+  color: var(--ink-2);
+}

@@ -1,0 +1,32 @@
+<view class="shop-page">
+  <view class="h-brand">
+    <view class="h-brand-row">
+      <view class="h-brand-title">好　物</view>
+    </view>
+  </view>
+
+  <view class="shop-body">
+    <view class="shop-loading" wx:if="{{loading && !items.length}}">加载中...</view>
+    <view class="shop-empty" wx:elif="{{!items.length}}">暂无好物，敬请期待</view>
+    <view class="shop-grid" wx:else>
+      <block wx:for="{{items}}" wx:key="id">
+        <view class="shop-card" data-id="{{item.id}}" bindtap="tapCard">
+          <view class="shop-card-hero">
+            <image
+              wx:if="{{item.cover_url}}"
+              class="shop-card-cover"
+              src="{{item.cover_url}}"
+              mode="aspectFill"
+            />
+            <view wx:else class="shop-card-cover-empty">暂无图片</view>
+          </view>
+          <view class="shop-card-title">{{item.title}}</view>
+          <view class="shop-card-sub">{{item.subtitle}}</view>
+          <view class="shop-card-foot">
+            <view class="shop-card-read">点击了解 →</view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

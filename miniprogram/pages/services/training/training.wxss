@@ -1,0 +1,328 @@
+.training-page {
+  min-height: 100vh;
+  background: #FBFAF7;
+  padding-bottom: calc(48rpx + env(safe-area-inset-bottom));
+  color: var(--ink);
+}
+
+.section-head {
+  margin: 42rpx 34rpx 18rpx;
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+}
+
+.section-head.first {
+  margin-top: 34rpx;
+}
+
+.section-mark {
+  width: 6rpx;
+  height: 30rpx;
+  border-radius: 4rpx;
+  background: #A63D2F;
+}
+
+.section-title {
+  font-family: 'STSong', 'Songti SC', serif;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1A1612;
+}
+
+.section-more {
+  margin-left: auto;
+  font-size: 24rpx;
+  color: #A63D2F;
+}
+
+.loading {
+  margin: 48rpx 34rpx;
+  color: #7A6E64;
+  font-size: 26rpx;
+  text-align: center;
+}
+
+.program-list,
+.past-list {
+  padding: 0 30rpx;
+}
+
+.program-card,
+.empty-card,
+.past-card {
+  background: #fff;
+  border: 1rpx solid #EFE8DC;
+  border-radius: 16rpx;
+  box-shadow: 0 10rpx 26rpx rgba(68, 49, 35, 0.06);
+}
+
+.program-card {
+  padding: 28rpx;
+  margin-bottom: 22rpx;
+}
+
+.card-top {
+  display: flex;
+  gap: 18rpx;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.program-title {
+  flex: 1;
+  min-width: 0;
+  color: #1A1612;
+  font-size: 31rpx;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.status-tag {
+  flex-shrink: 0;
+  max-width: 180rpx;
+  padding: 7rpx 14rpx;
+  border-radius: 8rpx;
+  background: #FBEEEC;
+  color: #A63D2F;
+  font-size: 22rpx;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.meta-grid {
+  margin-top: 22rpx;
+  display: grid;
+  gap: 12rpx;
+}
+
+.meta-row {
+  display: flex;
+  gap: 16rpx;
+  align-items: flex-start;
+  font-size: 26rpx;
+  line-height: 1.45;
+}
+
+.meta-label {
+  width: 58rpx;
+  flex-shrink: 0;
+  color: #9B8F84;
+  font-size: 23rpx;
+}
+
+.meta-value {
+  flex: 1;
+  min-width: 0;
+  color: #3A332C;
+}
+
+.signup-count {
+  margin-top: 20rpx;
+  color: #8C6D2F;
+  font-size: 23rpx;
+}
+
+.card-actions {
+  margin-top: 24rpx;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18rpx;
+}
+
+.primary-action,
+.plain-action,
+.cancel-action,
+.submit-action {
+  min-height: 76rpx;
+  line-height: 76rpx;
+  border-radius: 14rpx;
+  font-size: 27rpx;
+  margin: 0;
+  padding: 0 18rpx;
+}
+
+.primary-action,
+.submit-action {
+  background: #A63D2F;
+  color: #fff;
+}
+
+.plain-action,
+.cancel-action {
+  background: #fff;
+  color: #3A332C;
+  border: 1rpx solid #E8E2D5;
+}
+
+.primary-action.signed {
+  background: #E8E3D8;
+  color: #B8AFA3;
+  box-shadow: none;
+}
+
+.empty-card {
+  margin: 0 30rpx;
+  padding: 54rpx 40rpx;
+  text-align: center;
+}
+
+.empty-icon {
+  margin: 0 auto 20rpx;
+  width: 86rpx;
+  height: 86rpx;
+  border-radius: 999rpx;
+  background: #FBEEEC;
+  color: #A63D2F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'STSong', 'Songti SC', serif;
+  font-size: 36rpx;
+}
+
+.empty-title {
+  font-size: 30rpx;
+  color: #1A1612;
+  font-weight: 600;
+}
+
+.empty-text {
+  margin-top: 12rpx;
+  color: #7A6E64;
+  font-size: 25rpx;
+  line-height: 1.6;
+}
+
+.past-head {
+  margin-top: 46rpx;
+}
+
+.past-card {
+  min-height: 108rpx;
+  padding: 22rpx 24rpx;
+  margin-bottom: 16rpx;
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.past-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.past-title {
+  font-size: 28rpx;
+  color: #1A1612;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.past-meta {
+  margin-top: 8rpx;
+  color: #7A6E64;
+  font-size: 23rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.past-status {
+  flex-shrink: 0;
+  padding: 6rpx 14rpx;
+  border-radius: 8rpx;
+  background: #F5EDD9;
+  color: #8C6D2F;
+  font-size: 22rpx;
+}
+
+.sheet-mask {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(26, 22, 18, 0.42);
+}
+
+.signup-sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 51;
+  padding: 18rpx 34rpx calc(34rpx + env(safe-area-inset-bottom));
+  background: #fff;
+  border-radius: 28rpx 28rpx 0 0;
+  box-shadow: 0 -16rpx 40rpx rgba(26, 22, 18, 0.15);
+}
+
+.sheet-handle {
+  width: 72rpx;
+  height: 8rpx;
+  border-radius: 999rpx;
+  background: #E8E2D5;
+  margin: 0 auto 26rpx;
+}
+
+.sheet-title {
+  font-size: 34rpx;
+  color: #1A1612;
+  font-weight: 700;
+}
+
+.sheet-program {
+  margin-top: 12rpx;
+  font-size: 28rpx;
+  color: #3A332C;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.sheet-time {
+  margin-top: 8rpx;
+  color: #7A6E64;
+  font-size: 24rpx;
+}
+
+.field {
+  margin-top: 26rpx;
+}
+
+.field-label {
+  margin-bottom: 12rpx;
+  color: #3A332C;
+  font-size: 25rpx;
+  font-weight: 600;
+}
+
+.field-label text {
+  color: #A63D2F;
+}
+
+.field-input {
+  height: 82rpx;
+  border-radius: 14rpx;
+  border: 1rpx solid #E8E2D5;
+  background: #FAF8F4;
+  color: #1A1612;
+  font-size: 28rpx;
+  padding: 0 22rpx;
+  box-sizing: border-box;
+}
+
+.sheet-note {
+  margin-top: 24rpx;
+  padding: 18rpx 20rpx;
+  border-left: 6rpx solid #A63D2F;
+  background: #FBEEEC;
+  color: #3A332C;
+  font-size: 23rpx;
+  line-height: 1.55;
+}
+
+.sheet-actions {
+  margin-top: 28rpx;
+  display: grid;
+  grid-template-columns: 200rpx 1fr;
+  gap: 18rpx;
+}

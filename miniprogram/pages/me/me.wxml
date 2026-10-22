@@ -1,0 +1,64 @@
+<view class="me-page">
+
+  <view class="me-hero">
+    <view class="me-hero-row">
+      <view class="me-avatar">
+        <text wx:if="{{isLoggedIn}}">{{profile.real_name ? profile.real_name.slice(0,1) : "村"}}</text>
+        <text wx:else>人</text>
+      </view>
+      <view class="me-info">
+        <view class="me-name">{{isLoggedIn ? (profile.real_name || profile.nickname || "村民用户") : "游客浏览"}}</view>
+        <view class="me-tip">{{isLoggedIn ? authBadgeText : "登录后享受完整服务"}}</view>
+      </view>
+      <button wx:if="{{!isLoggedIn}}" class="me-login-btn" bindtap="goAuthCenter">去登录</button>
+    </view>
+  </view>
+
+  <view class="me-list">
+    <view class="me-row" bindtap="goAuthCenter">
+      <view class="me-row-icon">认</view>
+      <view class="me-row-body">
+        <view class="me-row-name">实名认证</view>
+        <view class="me-row-desc">姓名 · 身份证 · 手机号</view>
+      </view>
+      <view class="me-row-status {{isAuthVerified ? 'me-status-ok' : 'me-status-warn'}}">
+        {{isAuthVerified ? "已认证" : "待认证"}}
+      </view>
+      <view class="me-row-arrow">›</view>
+    </view>
+
+    <view class="me-row" bindtap="openApplications">
+      <view class="me-row-icon">办</view>
+      <view class="me-row-body">
+        <view class="me-row-name">办理记录</view>
+        <view class="me-row-desc">申请 · 进度 · 结果</view>
+      </view>
+      <view class="me-row-num">{{applyCount}}</view>
+      <view class="me-row-arrow">›</view>
+    </view>
+
+    <view class="me-row" bindtap="openHelp">
+      <view class="me-row-icon">助</view>
+      <view class="me-row-body">
+        <view class="me-row-name">使用帮助</view>
+        <view class="me-row-desc">常见问题与说明</view>
+      </view>
+      <view class="me-row-arrow">›</view>
+    </view>
+
+    <view class="me-row" bindtap="openPrivacy">
+      <view class="me-row-icon">隐</view>
+      <view class="me-row-body">
+        <view class="me-row-name">隐私政策</view>
+        <view class="me-row-desc">个人信息保护</view>
+      </view>
+      <view class="me-row-arrow">›</view>
+    </view>
+  </view>
+
+  <view class="me-footer">得胜服务通 · v1.1.0 · 得胜村委会出品</view>
+  <view class="me-record-footer">
+    <view class="me-record-name">平江县上塔市镇得胜村村委会</view>
+    <view class="me-record-icp">湘ICP备2026012359号</view>
+  </view>
+</view>

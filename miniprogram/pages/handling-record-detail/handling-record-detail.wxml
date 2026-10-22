@@ -1,0 +1,74 @@
+<view class="detail-page" wx:if="{{detail}}">
+  <view class="detail-scroll">
+    <!-- 状态头 -->
+    <view class="d-statehead">
+      <view class="d-badge d-badge-{{detail.group}}">
+        <view class="d-badge-dot"></view>
+        <text>{{detail.status_label}}</text>
+      </view>
+      <view class="d-h1">{{detail.title}}</view>
+      <view class="d-meta">{{detail.type_label}} · 提交于 {{detail.submitted_at}}</view>
+    </view>
+
+    <!-- 处理结果 / 退回原因 -->
+    <view class="d-block">
+      <view class="d-bt"><view class="d-bar"></view><text class="d-bt-title">{{detail.reply_title}}</text></view>
+      <view class="d-reply" wx:if="{{detail.reply}}">{{detail.reply}}</view>
+      <view class="d-reply d-reply-muted" wx:elif="{{detail.group === 'doing'}}">正在办理中，请耐心等待村委处理。</view>
+      <view class="d-reply d-reply-muted" wx:else>暂无说明。</view>
+    </view>
+
+    <!-- 电子证明（开具证明 · 已办结） -->
+    <view class="d-block" wx:if="{{detail.certificate_urls.length}}">
+      <view class="d-bt"><view class="d-bar"></view><text class="d-bt-title">电子证明</text></view>
+      <view class="d-cert-imgs">
+        <block wx:for="{{detail.certificate_urls}}" wx:key="*this">
+          <image
+            class="d-cert-img"
+            src="{{item}}"
+            mode="aspectFit"
+            data-current="{{item}}"
+            bindtap="previewCertificate"
+          />
+        </block>
+      </view>
+      <view class="d-cert-actions">
+        <view class="d-cert-btn ghost" data-current="{{detail.certificate_urls[0]}}" bindtap="previewCertificate">查看</view>
+        <view class="d-cert-btn" data-current="{{detail.certificate_urls[0]}}" bindtap="saveCertificate">保存到相册</view>
+      </view>
+    </view>
+
+    <!-- 我提交的内容 -->
+    <view class="d-block" wx:if="{{detail.fields.length || detail.materials.length || detail.attachments.length}}">
+      <view class="d-bt"><view class="d-bar"></view><text class="d-bt-title">我提交的内容</text></view>
+      <view class="d-field" wx:for="{{detail.fields}}" wx:key="k">
+        <text class="d-field-k">{{item.k}}</text>
+        <text class="d-field-v">{{item.v}}</text>
+      </view>
+      <view class="d-materials" wx:if="{{detail.materials.length}}">
+        <view class="d-mat-row" wx:for="{{detail.materials}}" wx:key="name">
+          <text class="d-mat-name">{{item.name}}</text>
+          <text class="d-mat-count">×{{item.count}}</text>
+        </view>
+      </view>
+      <view class="d-imgs" wx:if="{{detail.attachments.length}}">
+        <block wx:for="{{detail.attachments}}" wx:key="*this">
+          <image
+            class="d-img"
+            src="{{item}}"
+            mode="aspectFill"
+            data-current="{{item}}"
+            bindtap="previewAttachment"
+          />
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <!-- 退回态：补齐材料·重新提交 -->
+  <view class="d-resubmit" wx:if="{{detail.can_resubmit}}">
+    <button class="d-resubmit-btn" bindtap="resubmit">补齐材料 · 重新提交</button>
+  </view>
+</view>
+
+<view class="detail-loading" wx:elif="{{loading}}">加载中...</view>

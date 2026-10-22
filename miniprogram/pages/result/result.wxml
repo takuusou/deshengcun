@@ -1,0 +1,29 @@
+<view class="result-page">
+  <view class="result-wrap">
+    <view class="result-icon {{status === 'success' ? 'success' : 'fail'}}">
+      <text>{{status === 'success' ? '✓' : '!'}}</text>
+    </view>
+    <view class="result-title">{{title}}</view>
+    <view class="result-desc">{{desc}}</view>
+
+    <view class="result-info-card">
+      <view class="result-info-row">
+        <view class="result-info-label">申请事项</view>
+        <view class="result-info-value">{{itemTitle || "村务服务"}}</view>
+      </view>
+      <view class="result-info-row">
+        <view class="result-info-label">提交时间</view>
+        <view class="result-info-value">{{submittedAt}}</view>
+      </view>
+      <view class="result-info-row">
+        <view class="result-info-label">预计处理</view>
+        <view class="result-info-value">1-3 个工作日</view>
+      </view>
+    </view>
+
+    <view class="result-actions">
+      <button class="btn-ghost" bindtap="goHome">返回首页</button>
+      <button class="btn-beni" bindtap="goRecords">查看进度</button>
+    </view>
+  </view>
+</view>

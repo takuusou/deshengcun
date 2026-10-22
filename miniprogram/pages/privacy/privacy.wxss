@@ -1,0 +1,50 @@
+.privacy-page {
+  min-height: 100vh;
+  background: var(--bg);
+  padding-bottom: 56rpx;
+}
+
+.privacy-card {
+  margin: 24rpx 36rpx 0;
+  padding: 28rpx;
+  background: #fff;
+  border: 1rpx solid var(--line-2);
+  border-radius: 20rpx;
+}
+
+.privacy-section-title {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  font-family: 'STSong', 'Songti SC', serif;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 14rpx;
+}
+
+.privacy-section-title::before {
+  content: '';
+  width: 6rpx;
+  height: 28rpx;
+  border-radius: 3rpx;
+  background: var(--beni);
+}
+
+.privacy-text {
+  font-size: 27rpx;
+  color: var(--ink-2);
+  line-height: 1.8;
+  text-align: justify;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.privacy-paragraph + .privacy-paragraph {
+  margin-top: 16rpx;
+}
+
+.privacy-error {
+  background: var(--beni-pale-2);
+}
