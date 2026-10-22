@@ -65,8 +65,10 @@ npm ci
 
 ## 感谢
 
-感谢以下技术、开源项目与平台对得胜服务通的支持，以下排名不分先后：
+感谢以下协作工具、技术、开源项目与平台对得胜服务通的支持，以下排名不分先后：
 
+- ChatGPT / Codex（OpenAI）：AI 开发协作，协助代码实现、问题排查、测试验证与技术文档整理。
+- Claude（Anthropic）：AI 产品方案经理，协助产品方案设计、需求梳理与方案讨论。
 - 微信小程序、微信开发者工具、微信云托管：村民端开发与服务部署。
 - JavaScript、WXML、WXSS、HTML、CSS、Vue、Vue Router、Pinia、Axios、GSAP：小程序与管理后台界面、交互及状态管理。
 - Vite、@vitejs/plugin-vue、Node.js、npm：管理后台的开发、构建与依赖管理。
