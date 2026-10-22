@@ -62,3 +62,16 @@ npm ci
 ```
 
 小程序使用微信开发者工具打开 `miniprogram/`。后台与后端的运行、发布流程见各目录说明；脱敏占位值必须先完成配置。
+
+## 感谢
+
+感谢以下技术、开源项目与平台对得胜服务通的支持，以下排名不分先后：
+
+- 微信小程序、微信开发者工具、微信云托管：村民端开发与服务部署。
+- JavaScript、WXML、WXSS、HTML、CSS、Vue、Vue Router、Pinia、Axios、GSAP：小程序与管理后台界面、交互及状态管理。
+- Vite、@vitejs/plugin-vue、Node.js、npm：管理后台的开发、构建与依赖管理。
+- Python、FastAPI、Uvicorn、Pydantic、python-multipart：后端接口、数据校验与文件上传。
+- MySQL、SQLite、PyMySQL、openpyxl、numbers-parser：数据存储、本地开发及表格处理。
+- 腾讯云 COS、cos-python-sdk-v5、Boto3、Amazon S3 兼容接口：图片与业务附件的对象存储。
+- OpenSSL、argon2-cffi、Python 标准库：数据加密、密码保护、HMAC-SHA-256 与 TOTP 等安全机制。
+- Docker、Git、GitHub、Notion：容器化、版本管理与项目文档。
