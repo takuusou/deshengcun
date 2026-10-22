@@ -3,10 +3,11 @@
 面向村民的公益服务微信小程序，配套村干部管理后台。项目希望让村务信息更容易获取，让便民办事和处理结果更容易查询，不以盈利为目的。
 
 村民端（小程序）
-<img width="828" height="1560" alt="image" src="https://github.com/user-attachments/assets/693d96f7-b377-4f98-8b7c-e1f5b3a35f90" /> <img width="828" height="1560" alt="image" src="https://github.com/user-attachments/assets/7ad885f2-9cf3-4ee6-a2b7-eea72cf04f4c" />  <img width="828" height="1560" alt="image" src="https://github.com/user-attachments/assets/96257949-f724-4180-9d5a-d19a2dbd1206" />  <img width="828" height="1560" alt="image" src="https://github.com/user-attachments/assets/37388f50-8543-442d-9cdd-2111b00ddb8e" />  <img width="828" height="1560" alt="image" src="https://github.com/user-attachments/assets/298a0d20-765d-4b18-9c84-719f84fdd6db" />  <img width="834" height="1560" alt="image" src="https://github.com/user-attachments/assets/f58f4a99-0d18-4491-a1b7-c82ce4aa9f29" />  
+ <img width="1454" height="768" alt="8d65657d-8507-4d32-a6bc-7d541703392f" src="https://github.com/user-attachments/assets/260b34b8-0fca-467a-bd13-d2d79045a52e" />
+<img width="1458" height="764" alt="2e4dbf40-eb80-4ed7-8cc4-0a40679df3e4" src="https://github.com/user-attachments/assets/70122895-51a5-4af5-bd14-6ace13adfbc3" />
 
 村委端（管理端）
-<img width="834" height="1560" alt="image" src="https://github.com/user-attachments/assets/2fd38fa6-8bb4-40c1-9ba1-b7ba1d8df6fe" />
+<img width="3826" height="1694" alt="ef6f0219-afad-4158-84e2-e9a7bc1fed73" src="https://github.com/user-attachments/assets/0d6eab8d-de0b-4a95-b837-39a0792e84c2" />
 <img width="2048" height="989" alt="image" src="https://github.com/user-attachments/assets/18229fe2-45f3-4baa-bee8-11778ad750cb" />
 <img width="2048" height="988" alt="image" src="https://github.com/user-attachments/assets/d969d135-10e1-48c7-b83a-53972e936ad3" />
 
