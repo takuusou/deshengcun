@@ -4,7 +4,7 @@
 
 得胜服务通是一款面向真实村级服务场景的公益微信小程序，配套村干部管理后台，用于通知发布、村务公开、便民办事和办理结果查询，不以盈利为目的。
 
-项目案例文章：[得胜服务通 · Notion 项目介绍](https://wide-nest-95c.notion.site/3f715452b84481a9a9a7f9bfb8e40a9f)。
+详细项目介绍：[得胜服务通 · Notion](https://wide-nest-95c.notion.site/3f715452b84481a9a9a7f9bfb8e40a9f)。
 
 村民端（小程序）
  <img width="1454" height="768" alt="8d65657d-8507-4d32-a6bc-7d541703392f" src="https://github.com/user-attachments/assets/260b34b8-0fca-467a-bd13-d2d79045a52e" />
@@ -14,8 +14,6 @@
 <img width="3826" height="1694" alt="ef6f0219-afad-4158-84e2-e9a7bc1fed73" src="https://github.com/user-attachments/assets/0d6eab8d-de0b-4a95-b837-39a0792e84c2" />
 <img width="2048" height="989" alt="image" src="https://github.com/user-attachments/assets/18229fe2-45f3-4baa-bee8-11778ad750cb" />
 <img width="2048" height="988" alt="image" src="https://github.com/user-attachments/assets/d969d135-10e1-48c7-b83a-53972e936ad3" />
-
-本仓库提供 **v1.1.0 网安整改版本的脱敏展示代码**，生产配置与村民业务数据不随代码公开。
 
 ## 功能
 
@@ -45,8 +43,6 @@
 - 身份证展示保留前六位，其余隐藏；手机号展示保留前三位与后四位。
 - 保留生产环境安全校验、后台口令要求及 MFA 机制。
 - 户籍重建工具与数据清理方案不在克隆时执行；仓库不包含实际重建数据。
-
-以上描述的是代码机制，不构成“绝无漏洞”或已通过外部测评的声明。
 
 ## 开发与配置
 
