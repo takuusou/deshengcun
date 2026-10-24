@@ -210,7 +210,7 @@ def main() -> int:
         duplicate_count=duplicate_count,
     )
     if len(entries) != EXPECTED_UNIQUE_RECORDS:
-        raise SystemExit("有效去重记录数不是预期的 1744 条，已拒绝生成 SQL。")
+        raise SystemExit(f"有效去重记录数不是预期的 {EXPECTED_UNIQUE_RECORDS} 条，已拒绝生成 SQL。")
     if args.dry_run:
         return 0
 
