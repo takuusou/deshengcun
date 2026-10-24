@@ -1,5 +1,42 @@
 # 得胜服务通 · v1.1.0
 
+[English](#english-overview) · [简体中文](#中文介绍)
+
+## English Overview
+
+**Deshengcun is a public-interest village services platform, deployed in Desheng Village—a community of 1,744 residents across 538 households and nine village groups.**
+
+It combines a WeChat Mini Program for residents, a web administration console for village staff, and an API backend. Its purpose is to make local information easier to access and everyday community services easier to request and manage, without a profit-making objective.
+
+### What it does
+
+- Publishes village notices, public information, service guidance, and local product information.
+- Lets residents submit service requests, suggestions, applications, and training or volunteer registrations, and check their own records.
+- Gives authorized staff tools to maintain content, process applications, manage resident records and permissions, and review audit logs.
+- Keeps personal submissions separate from public content. Notices can be read without signing in; private submissions are not displayed as public comments to other residents.
+
+### Use it for your own village
+
+The project is not limited to Desheng Village. Other village teams can download or fork the code, adapt it, and run an independent installation to serve their own residents. The original software code is available under the [MIT License](LICENSE), which permits use, modification, and distribution, including commercial use, subject to its notice requirements.
+
+This is a WeChat-based, Chinese-language application, not a ready-made multi-village hosting service. Each village needs its own infrastructure, configuration, content, and authorized resident data. Some village-specific text, initial data, and identity rules require source-level adaptation rather than configuration alone.
+
+To prepare a separate deployment:
+
+1. Clone this repository or download its source code. Use your own WeChat Mini Program account and AppID; configure `project.config.json`, `miniprogram/project.config.json`, and `miniprogram/config/env.js` for your application and backend.
+2. Provision your own backend service, MySQL database, private object storage, and HTTPS endpoint. Configuration templates are provided in `backend/.env.example` and `web-admin/.env.example`; the existing deployment guide is [backend/DEPLOY_CLOUDBASE.md](backend/DEPLOY_CLOUDBASE.md).
+3. Generate your own independent encryption, HMAC, backup, and signing secrets; configure administrator credentials and MFA. Keep the production startup checks enabled. Real credentials and resident data are not included in this repository.
+4. Replace village names, contact details, public content, group definitions, branding, and privacy notices. The current identity verification workflow uses Chinese resident ID rules and an authorized village roster. The included `rebuild_roster_hmac.py` is specific to Desheng's rebuild and enforces 1,743 records; review and adapt it before using it for a different population. Do not run data cleanup or migration tools blindly against an existing database.
+5. Test resident access, staff permissions, private attachments, and application workflows in a separate environment before completing your own WeChat review and release process.
+
+The original Desheng production service is not a shared backend for other deployments. Reusing the software does not grant access to its resident records or authorize use of the village committee's identity, seals, or other protected assets. Third-party dependencies and assets retain their own licenses and permissions.
+
+### Technology
+
+Native WeChat Mini Program (JavaScript, WXML, WXSS); Vue 3, Vite, Pinia, and Vue Router; Python, FastAPI, and Uvicorn; MySQL and private object storage. Security mechanisms include encrypted sensitive fields, purpose-separated HMAC-SHA-256 lookups, masked administration views, and administrator MFA.
+
+## 中文介绍
+
 **已上线，为得胜村 9 个村民小组、538 户、1744 位村民提供服务。**
 
 得胜服务通是一款面向真实村级服务场景的公益微信小程序，配套村干部管理后台，用于通知发布、村务公开、便民办事和办理结果查询，不以盈利为目的。
@@ -62,6 +99,14 @@ npm ci
 ```
 
 小程序使用微信开发者工具打开 `miniprogram/`。后台与后端的运行、发布流程见各目录说明；脱敏占位值必须先完成配置。
+
+## 在其他村庄使用
+
+本项目不限于得胜村。其他村庄可以下载或 Fork 代码，按 [MIT 许可证](LICENSE) 使用、修改和分发，并独立部署自己的村民服务系统。
+
+当前版本以中文、微信生态和中国居民身份证核验为基础，并非开箱即用的多村庄托管平台。除了配置自己的小程序 AppID、云托管、数据库、私有存储、HTTPS 和独立密钥，还需要适配村名、村组、初始内容与身份规则等本村专用内容。`backend/scripts/rebuild_roster_hmac.py` 固定校验 1743 条记录，其他村庄使用前必须审查并适配，不能直接照搬原有数据清理流程。
+
+MIT 许可适用于项目原创软件代码；第三方依赖及素材保留各自的许可与权利，不额外授权使用村委名称、标志、印章等内容。请使用自己获授权的数据和素材，完成独立测试后再上线。
 
 ## 感谢
 
